@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const route = useRoute();
+const { loggedIn, user, clear } = useUserSession();
+const router = useRouter();
+const toast = useToast();
 
 const links = [
   {
@@ -13,11 +16,31 @@ const links = [
     icon: 'i-lucide-info',
   },
   {
-    label: 'Login',
-    to: '/login',
-    icon: 'i-lucide-log-in',
+    label: 'Protected',
+    to: '/protected',
+    icon: 'i-lucide-shield',
+    requireAuth: true,
   },
 ];
+
+async function logout() {
+  try {
+    await $fetch('/api/auth/logout', { method: 'POST' });
+    await clear();
+    toast.add({
+      title: 'Success',
+      description: 'You have been logged out',
+      color: 'success',
+    });
+    router.push('/');
+  } catch (error) {
+    toast.add({
+      title: 'Error',
+      description: 'Failed to logout',
+      color: 'error',
+    });
+  }
+}
 
 watch(
   () => route.path,
@@ -39,16 +62,41 @@ watch(
 
       <template #right>
         <nav class="flex items-center gap-4">
-          <NuxtLink
-            v-for="link in links"
-            :key="link.to"
-            :to="link.to"
-            class="flex items-center gap-2 px-3 py-2 rounded-md transition-colors"
-            :class="route.path === link.to ? 'bg-primary text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-800'"
-          >
-            <UIcon :name="link.icon" class="w-4 h-4" />
-            <span>{{ link.label }}</span>
-          </NuxtLink>
+          <template v-for="link in links" :key="link.to">
+            <NuxtLink
+              v-if="!link.requireAuth || loggedIn"
+              :to="link.to"
+              class="flex items-center gap-2 px-3 py-2 rounded-md transition-colors"
+              :class="route.path === link.to ? 'bg-primary text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-800'"
+            >
+              <UIcon :name="link.icon" class="w-4 h-4" />
+              <span>{{ link.label }}</span>
+            </NuxtLink>
+          </template>
+
+          <AuthState>
+            <template #default="{ loggedIn }">
+              <div v-if="loggedIn" class="flex items-center gap-3">
+                <div class="flex items-center gap-2 px-3 py-2">
+                  <UIcon name="i-lucide-user" class="w-4 h-4" />
+                  <span class="text-sm">{{ user?.name || user?.email || user?.login }}</span>
+                </div>
+                <UButton icon="i-lucide-log-out" color="neutral" variant="ghost" @click="logout"> Logout </UButton>
+              </div>
+              <NuxtLink
+                v-else
+                to="/login"
+                class="flex items-center gap-2 px-3 py-2 rounded-md transition-colors"
+                :class="route.path === '/login' ? 'bg-primary text-white' : 'hover:bg-gray-100 dark:hover:bg-gray-800'"
+              >
+                <UIcon name="i-lucide-log-in" class="w-4 h-4" />
+                <span>Login</span>
+              </NuxtLink>
+            </template>
+            <template #placeholder>
+              <div class="w-24 h-10 bg-gray-200 dark:bg-gray-800 rounded-md animate-pulse"></div>
+            </template>
+          </AuthState>
         </nav>
       </template>
     </UHeader>
