@@ -15,7 +15,7 @@ export default defineEventHandler(async (event) => {
     if (!validation.success) {
       throw createError({
         statusCode: 400,
-        message: validation.error.errors[0].message,
+        message: validation.error.issues[0]?.message || 'Validation échouée',
       });
     }
 
@@ -57,9 +57,10 @@ export default defineEventHandler(async (event) => {
     return {
       success: true,
       user: {
-        id: STATIC_USER.id,
-        email: STATIC_USER.email,
-        name: STATIC_USER.name,
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        avatar: user.avatar,
       },
     };
   } catch (error) {

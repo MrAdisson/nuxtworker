@@ -16,7 +16,7 @@ export default eventHandler(async (event) => {
     if (!validation.success) {
       throw createError({
         statusCode: 400,
-        message: validation.error.errors[0].message,
+        message: validation.error.issues[0]?.message || 'Validation échouée',
       });
     }
 
@@ -49,15 +49,23 @@ export default eventHandler(async (event) => {
 
     const user = newUser[0];
 
+    if (!user) {
+      throw createError({
+        statusCode: 500,
+        message: "Erreur lors de la création de l'utilisateur",
+      });
+    }
+
     // Créer la session
     await setUserSession(event, {
       user: {
-        id: String(user.id!),
+        id: String(user.id),
         email: user.email,
         name: user.name || undefined,
         avatar: user.avatar || undefined,
         provider: 'credentials',
       },
+      loggedInAt: new Date(),
     });
 
     return {
