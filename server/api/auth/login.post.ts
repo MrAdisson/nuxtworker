@@ -1,50 +1,55 @@
+import { db, schema } from '@nuxthub/db';
+import { eq } from 'drizzle-orm';
 import { z } from 'zod';
 
-// Compte statique temporaire (à remplacer par une vraie base de données)
-const STATIC_USER = {
-  id: '1',
-  email: 'demo@example.com',
-  // Password: "password123" (hashé avec hashPassword)
-  // Vous devrez générer un vrai hash, celui-ci est juste un placeholder
-  passwordHash: '$scrypt$n=16384,r=8,p=1$aGFzaGVk$7d8c8f9e1c2b3a4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u2v3w4x5y6z7',
-  name: 'Demo User',
-};
-
 const loginSchema = z.object({
-  email: z.email('Invalid email'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
+  email: z.string().email('Email invalide'),
+  password: z.string().min(8, 'Le mot de passe doit contenir au moins 8 caractères'),
 });
 
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event);
-
   try {
-    const { email, password } = loginSchema.parse(body);
+    const body = await readBody(event);
+    const validation = loginSchema.safeParse(body);
 
-    // Vérifier l'email
-    if (email !== STATIC_USER.email) {
+    if (!validation.success) {
       throw createError({
-        statusCode: 401,
-        message: 'Invalid credentials',
+        statusCode: 400,
+        message: validation.error.errors[0].message,
       });
     }
 
-    // Pour le moment, on vérifie juste le mot de passe en dur
-    // Dans un vrai projet, vous utiliseriez : await verifyPassword(STATIC_USER.passwordHash, password)
-    if (password !== 'password123') {
+    const { email, password } = validation.data;
+    const { users } = schema;
+
+    // Récupérer l'utilisateur par email
+    const user = await db.select().from(users).where(eq(users.email, email)).get();
+
+    if (!user || !user.passwordHash) {
       throw createError({
         statusCode: 401,
-        message: 'Invalid credentials',
+        message: 'Email ou mot de passe incorrect',
+      });
+    }
+
+    // Vérifier le mot de passe avec nuxt-auth-utils
+    const isValid = await verifyPassword(user.passwordHash, password);
+
+    if (!isValid) {
+      throw createError({
+        statusCode: 401,
+        message: 'Email ou mot de passe incorrect',
       });
     }
 
     // Créer la session utilisateur
     await setUserSession(event, {
       user: {
-        id: STATIC_USER.id,
-        email: STATIC_USER.email,
-        name: STATIC_USER.name,
-        provider: 'password',
+        id: String(user.id!),
+        email: user.email,
+        name: user.name || undefined,
+        avatar: user.avatar || undefined,
+        provider: 'credentials',
       },
       loggedInAt: new Date(),
     });

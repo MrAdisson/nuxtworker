@@ -12,7 +12,8 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ['nitro-cloudflare-dev', '@nuxt/ui', 'nuxt-auth-utils'],
+  modules: ['nitro-cloudflare-dev', '@nuxt/ui', 'nuxt-auth-utils', '@nuxthub/core'],
+
   css: ['~/assets/css/main.css'],
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },

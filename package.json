@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@nuxt/ui": "^4.6.1",
+    "@nuxthub/core": "^0.10.7",
+    "drizzle-orm": "^0.45.2",
     "nuxt": "^4.4.2",
     "nuxt-auth-utils": "^0.5.29",
     "tailwindcss": "^4.2.2",
@@ -22,6 +24,7 @@
   },
   "devDependencies": {
     "@types/node": "^25.6.0",
+    "drizzle-kit": "^0.31.10",
     "nitro-cloudflare-dev": "^0.2.2",
     "nitropack": "^2.13.3",
     "wrangler": "^4.81.1"

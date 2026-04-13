@@ -8,7 +8,7 @@ declare module '#auth-utils' {
     login?: string;
     name?: string;
     avatar?: string;
-    provider: 'github' | 'password';
+    provider: 'github' | 'credentials';
   }
 
   interface UserSession {

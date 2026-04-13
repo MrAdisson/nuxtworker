@@ -13,29 +13,28 @@ const fields: AuthFormField[] = [
     name: 'email',
     type: 'email',
     label: 'Email',
-    placeholder: 'demo@example.com',
+    placeholder: 'votre@email.com',
     required: true,
   },
   {
     name: 'password',
-    label: 'Password',
+    label: 'Mot de passe',
     type: 'password',
-    placeholder: 'password123',
+    placeholder: 'Votre mot de passe',
     required: true,
   },
   {
     name: 'remember',
-    label: 'Remember me',
+    label: 'Se souvenir de moi',
     type: 'checkbox',
   },
 ];
 
 const providers = [
   {
-    label: 'GitHub',
+    label: 'Se connecter avec GitHub',
     icon: 'i-simple-icons-github',
     onClick: () => {
-      // Redirige vers la route OAuth GitHub
       navigateTo('/auth/github', { external: true });
     },
   },
@@ -52,7 +51,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
   loading.value = true;
 
   try {
-    const response = await $fetch('/api/auth/login', {
+    await $fetch('/api/auth/login', {
       method: 'POST',
       body: {
         email: payload.data.email,
@@ -60,7 +59,6 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
       },
     });
 
-    // Recharger la session utilisateur
     await fetchUserSession();
 
     toast.add({
@@ -69,7 +67,6 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
       color: 'success',
     });
 
-    // Rediriger vers la page d'accueil
     router.push('/');
   } catch (error: any) {
     toast.add({
@@ -84,22 +81,22 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
-  <UPageCard class="w-full max-w-md">
-    <UAuthForm
-      :schema="schema"
-      title="Connexion"
-      description="Entrez vos identifiants pour accéder à votre compte."
-      icon="i-lucide-user"
-      :fields="fields"
-      :providers="providers"
-      @submit="onSubmit"
-    />
+  <div>
+    <UPageCard class="w-full max-w-md">
+      <UAuthForm
+        :schema="schema"
+        title="Connexion"
+        description="Entrez vos identifiants pour accéder à votre compte."
+        icon="i-lucide-user"
+        :fields="fields"
+        :providers="providers"
+        @submit="onSubmit"
+      />
+    </UPageCard>
 
-    <template #footer>
-      <div class="text-center text-sm mt-4">
-        Pas encore de compte ?
-        <UButton to="/register" variant="link" :padded="false"> Créer un compte </UButton>
-      </div>
-    </template>
-  </UPageCard>
+    <div class="text-center text-sm mt-4">
+      Pas encore de compte ?
+      <UButton to="/register" variant="link" :padded="false"> Créer un compte </UButton>
+    </div>
+  </div>
 </template>
