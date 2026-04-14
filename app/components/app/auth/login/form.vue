@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { loginSchema, type LoginInput } from '@/schemas/auth';
 import type { AuthFormField, FormSubmitEvent } from '@nuxt/ui';
-import * as z from 'zod';
 
 const toast = useToast();
 const router = useRouter();
@@ -40,14 +40,7 @@ const providers = [
   },
 ];
 
-const schema = z.object({
-  email: z.email('Email invalide'),
-  password: z.string().min(8, 'Le mot de passe doit contenir au moins 8 caractères'),
-});
-
-type Schema = z.output<typeof schema>;
-
-async function onSubmit(payload: FormSubmitEvent<Schema>) {
+async function onSubmit(payload: FormSubmitEvent<LoginInput>) {
   loading.value = true;
 
   try {
@@ -81,7 +74,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
   <div>
     <UPageCard class="w-full max-w-md">
       <UAuthForm
-        :schema="schema"
+        :schema="loginSchema"
         title="Connexion"
         description="Entrez vos identifiants pour accéder à votre compte."
         icon="i-lucide-user"

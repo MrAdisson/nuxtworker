@@ -1,11 +1,7 @@
+import { loginSchema } from '@/schemas/auth';
 import { db, schema } from '@nuxthub/db';
 import { eq } from 'drizzle-orm';
-import { z } from 'zod';
-
-const loginSchema = z.object({
-  email: z.email('Email invalide'),
-  password: z.string().min(8, 'Le mot de passe doit contenir au moins 8 caractères'),
-});
+import { ZodError } from 'zod';
 
 export default defineEventHandler(async (event) => {
   try {
@@ -64,7 +60,7 @@ export default defineEventHandler(async (event) => {
       },
     };
   } catch (error) {
-    if (error instanceof z.ZodError) {
+    if (error instanceof ZodError) {
       throw createError({
         statusCode: 400,
         message: error.issues?.[0]?.message || 'Validation error',

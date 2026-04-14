@@ -1,12 +1,6 @@
+import { registerSchema } from '@/schemas/auth';
 import { db, schema } from '@nuxthub/db';
 import { eq } from 'drizzle-orm';
-import { z } from 'zod';
-
-const registerSchema = z.object({
-  email: z.email('Email invalide'),
-  password: z.string().min(8, 'Le mot de passe doit contenir au moins 8 caractères'),
-  name: z.string().min(2, 'Le nom doit contenir au moins 2 caractères'),
-});
 
 export default eventHandler(async (event) => {
   try {
