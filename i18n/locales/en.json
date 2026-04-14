@@ -21,6 +21,7 @@
     "appName": "NuxtWorker",
     "subtitle": "A modern web application powered by Nuxt 4 and Cloudflare Workers. Fast, secure, and scalable by design.",
     "getStarted": "Get Started",
+    "goToDashboard": "Go to Dashboard",
     "learnMore": "Learn More",
     "features": {
       "title": "Features",

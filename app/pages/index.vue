@@ -5,6 +5,7 @@ definePageMeta({
 
 const { t } = useI18n();
 const localePath = useLocalePath();
+const { loggedIn } = useUserSession();
 
 const features = computed(() => [
   {
@@ -43,7 +44,16 @@ const features = computed(() => [
           {{ t('home.subtitle') }}
         </p>
         <div class="flex gap-4 justify-center">
-          <UButton :to="localePath('/login')" color="primary" size="xl" icon="i-lucide-log-in">
+          <UButton
+            v-if="loggedIn"
+            :to="localePath('/dashboard')"
+            color="primary"
+            size="xl"
+            icon="i-lucide-layout-dashboard"
+          >
+            {{ t('home.goToDashboard') }}
+          </UButton>
+          <UButton v-else :to="localePath('/login')" color="primary" size="xl" icon="i-lucide-log-in">
             {{ t('home.getStarted') }}
           </UButton>
           <UButton :to="localePath('/about')" size="xl" variant="outline" icon="i-lucide-info">

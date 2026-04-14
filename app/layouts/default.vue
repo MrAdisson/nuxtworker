@@ -158,14 +158,14 @@ watch(
                     >
                       {{ user?.name || user?.email || user?.login }}
                     </UButton>
-                    <UButton icon="i-lucide-log-out" color="neutral" variant="ghost" size="sm" @click="logout" block>
+                    <UButton icon="i-lucide-power" color="neutral" variant="ghost" size="sm" @click="logout" block>
                       {{ t('nav.logout') }}
                     </UButton>
                   </div>
                   <UButton
                     v-else
                     :to="localePath('/login')"
-                    icon="i-lucide-log-in"
+                    icon="i-lucide-shield-check"
                     :color="route.path === localePath('/login') ? 'primary' : 'neutral'"
                     :variant="route.path === localePath('/login') ? 'soft' : 'ghost'"
                     size="sm"
