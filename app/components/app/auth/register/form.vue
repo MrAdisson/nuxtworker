@@ -75,8 +75,8 @@ async function onSubmit(payload: FormSubmitEvent<RegisterInput>) {
 </script>
 
 <template>
-  <div>
-    <UPageCard class="w-full max-w-md">
+  <div class="w-full">
+    <UPageCard class="w-full sm:w-md mx-auto max-w-md">
       <UAuthForm
         :schema="registerSchema"
         :fields="fields"

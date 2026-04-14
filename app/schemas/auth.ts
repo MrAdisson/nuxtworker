@@ -6,16 +6,17 @@ import { z } from 'zod';
  */
 export const loginSchema = z.object({
   email: z.email('Email invalide'),
-  password: z.coerce.string().min(1, 'Le mot de passe est requis'),
+  password: z.string().min(1, 'Le mot de passe est requis'),
+  remember: z.boolean().optional(),
 });
 
 /**
  * Schéma de validation pour l'inscription
  */
 export const registerSchema = z.object({
-  name: z.coerce.string().min(2, 'Le nom doit contenir au moins 2 caractères'),
+  name: z.string().min(2, 'Le nom doit contenir au moins 2 caractères'),
   email: z.email('Email invalide'),
-  password: z.coerce.string().min(8, 'Le mot de passe doit contenir au moins 8 caractères'),
+  password: z.string().min(8, 'Le mot de passe doit contenir au moins 8 caractères'),
 });
 
 // Types TypeScript dérivés des schémas

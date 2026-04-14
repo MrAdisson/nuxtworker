@@ -9,6 +9,7 @@ const { t } = useI18n();
 const localePath = useLocalePath();
 
 const loading = ref(false);
+const initialEmail = import.meta.client ? localStorage.getItem('remembered_email') || '' : '';
 
 const fields = computed<AuthFormField[]>(() => [
   {
@@ -17,6 +18,7 @@ const fields = computed<AuthFormField[]>(() => [
     label: t('auth.login.email'),
     placeholder: t('auth.login.emailPlaceholder'),
     required: true,
+    defaultValue: initialEmail,
   },
   {
     name: 'password',
@@ -29,6 +31,7 @@ const fields = computed<AuthFormField[]>(() => [
     name: 'remember',
     label: t('auth.login.remember'),
     type: 'checkbox',
+    defaultValue: !!initialEmail,
   },
 ]);
 
@@ -48,8 +51,17 @@ async function onSubmit(payload: FormSubmitEvent<LoginInput>) {
   try {
     await $fetch('/api/auth/login', {
       method: 'POST',
-      body: payload.data, // Directement les données validées !
+      body: payload.data,
     });
+
+    // Gérer le localStorage selon "remember me"
+    if (import.meta.client) {
+      if (payload.data.remember) {
+        localStorage.setItem('remembered_email', payload.data.email);
+      } else {
+        localStorage.removeItem('remembered_email');
+      }
+    }
 
     await fetchUserSession();
 
@@ -73,8 +85,8 @@ async function onSubmit(payload: FormSubmitEvent<LoginInput>) {
 </script>
 
 <template>
-  <div>
-    <UPageCard class="w-full max-w-md">
+  <div class="w-full">
+    <UPageCard class="w-full sm:w-md mx-auto max-w-md">
       <UAuthForm
         :schema="loginSchema"
         :title="t('auth.login.title')"
