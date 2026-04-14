@@ -2,7 +2,10 @@
   "common": {
     "user": "User",
     "na": "N/A",
-    "days": "days"
+    "days": "days",
+    "settings": {
+      "language": "Language"
+    }
   },
   "nav": {
     "home": "Home",
