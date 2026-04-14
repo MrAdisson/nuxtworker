@@ -7,7 +7,7 @@ const features = [
   {
     icon: 'i-lucide-rocket',
     title: 'Fast & Modern',
-    description: 'Built with Nuxt 3 and deployed on Cloudflare Workers for blazing fast performance.',
+    description: 'Built with Nuxt 4 and deployed on Cloudflare Workers for blazing fast performance.',
   },
   {
     icon: 'i-lucide-shield',
@@ -37,7 +37,7 @@ const features = [
           <span class="text-primary">NuxtWorker</span>
         </h1>
         <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">
-          A modern web application powered by Nuxt 3 and Cloudflare Workers. Fast, secure, and scalable by design.
+          A modern web application powered by Nuxt 4 and Cloudflare Workers. Fast, secure, and scalable by design.
         </p>
         <div class="flex gap-4 justify-center">
           <UButton to="/login" color="primary" size="xl" icon="i-lucide-log-in"> Get Started </UButton>

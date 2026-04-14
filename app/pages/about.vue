@@ -5,7 +5,7 @@ definePageMeta({
 
 const technologies = [
   {
-    name: 'Nuxt 3',
+    name: 'Nuxt 4',
     icon: 'i-simple-icons-nuxtdotjs',
     description: 'The Intuitive Vue Framework',
     link: 'https://nuxt.com',
@@ -38,7 +38,7 @@ const technologies = [
       <div class="text-center mb-12">
         <h1 class="text-4xl font-bold mb-4">About NuxtWorker</h1>
         <p class="text-xl text-gray-600 dark:text-gray-400">
-          A modern web application showcasing the power of Nuxt 3 and Cloudflare Workers
+          A modern web application showcasing the power of Nuxt 4 and Cloudflare Workers
         </p>
       </div>
 
@@ -48,7 +48,7 @@ const technologies = [
           <h2>What is NuxtWorker?</h2>
           <p>
             NuxtWorker is a modern web application template that combines the best of frontend and edge computing. Built
-            with Nuxt 3, it leverages Cloudflare Workers to deliver content at lightning speed from the edge, closest to
+            with Nuxt 4, it leverages Cloudflare Workers to deliver content at lightning speed from the edge, closest to
             your users.
           </p>
           <p>
