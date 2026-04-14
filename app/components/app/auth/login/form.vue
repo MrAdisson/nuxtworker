@@ -41,7 +41,7 @@ const providers = [
 ];
 
 const schema = z.object({
-  email: z.string().email('Email invalide'),
+  email: z.email('Email invalide'),
   password: z.string().min(8, 'Le mot de passe doit contenir au moins 8 caractères'),
 });
 
@@ -53,10 +53,7 @@ async function onSubmit(payload: FormSubmitEvent<Schema>) {
   try {
     await $fetch('/api/auth/login', {
       method: 'POST',
-      body: {
-        email: payload.data.email,
-        password: payload.data.password,
-      },
+      body: payload.data, // Directement les données validées !
     });
 
     await fetchUserSession();

@@ -1,18 +1,14 @@
 <script setup lang="ts">
+import type { AuthFormField, FormSubmitEvent } from '@nuxt/ui';
+import * as z from 'zod';
+
 const toast = useToast();
 const router = useRouter();
 const { fetch: fetchUserSession } = useUserSession();
 
-const form = ref({
-  name: '',
-  email: '',
-  password: '',
-});
-
-const error = ref('');
 const loading = ref(false);
 
-const fields = [
+const fields: AuthFormField[] = [
   {
     name: 'name',
     type: 'text',
@@ -40,19 +36,27 @@ const providers = [
   {
     label: "S'inscrire avec GitHub",
     icon: 'i-simple-icons-github',
-    to: '/auth/github',
-    external: true,
+    onClick: () => {
+      navigateTo('/auth/github', { external: true });
+    },
   },
 ];
 
-async function onSubmit() {
-  error.value = '';
+const schema = z.object({
+  name: z.string().min(2, 'Le nom doit contenir au moins 2 caractères'),
+  email: z.email('Email invalide'),
+  password: z.string().min(8, 'Le mot de passe doit contenir au moins 8 caractères'),
+});
+
+type Schema = z.output<typeof schema>;
+
+async function onSubmit(payload: FormSubmitEvent<Schema>) {
   loading.value = true;
 
   try {
     await $fetch('/api/auth/register', {
       method: 'POST',
-      body: form.value,
+      body: payload.data, // Directement les données validées par Zod !
     });
 
     await fetchUserSession();
@@ -65,11 +69,9 @@ async function onSubmit() {
 
     await navigateTo('/');
   } catch (err: any) {
-    error.value = err.data?.message || 'Erreur lors de la création du compte';
-
     toast.add({
       title: 'Erreur',
-      description: error.value,
+      description: err.data?.message || 'Erreur lors de la création du compte',
       color: 'error',
     });
   } finally {
@@ -82,20 +84,15 @@ async function onSubmit() {
   <div>
     <UPageCard class="w-full max-w-md">
       <UAuthForm
-        v-model="form"
+        :schema="schema"
         :fields="fields"
         :providers="providers"
-        :validate-on="['blur', 'change']"
         title="Créer un compte"
         description="Remplissez le formulaire pour créer votre compte."
         icon="i-lucide-user-plus"
         align="top"
         @submit="onSubmit"
-      >
-        <template #validation>
-          <UAlert v-if="error" color="error" icon="i-heroicons-exclamation-triangle" :title="error" class="mb-4" />
-        </template>
-      </UAuthForm>
+      />
     </UPageCard>
 
     <div class="text-center text-sm mt-4">
