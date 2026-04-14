@@ -48,6 +48,13 @@
     }
   },
   "auth": {
+    "validation": {
+      "emailInvalid": "Email invalide",
+      "passwordRequired": "Le mot de passe est requis",
+      "passwordMin": "Le mot de passe doit contenir au moins 8 caractères",
+      "nameRequired": "Le nom est requis",
+      "nameMin": "Le nom doit contenir au moins 2 caractères"
+    },
     "login": {
       "title": "Bienvenue",
       "subtitle": "Connectez-vous pour continuer",

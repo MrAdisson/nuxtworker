@@ -5,8 +5,8 @@ import { z } from 'zod';
  * Note: pas de validation de longueur pour ne pas révéler les contraintes (sécurité)
  */
 export const loginSchema = z.object({
-  email: z.email('Email invalide'),
-  password: z.string().min(1, 'Le mot de passe est requis'),
+  email: z.email('Invalid email'),
+  password: z.string('Password is required').min(1, 'Password is required'),
   remember: z.boolean().optional(),
 });
 
@@ -14,9 +14,9 @@ export const loginSchema = z.object({
  * Schéma de validation pour l'inscription
  */
 export const registerSchema = z.object({
-  name: z.string().min(2, 'Le nom doit contenir au moins 2 caractères'),
-  email: z.email('Email invalide'),
-  password: z.string().min(8, 'Le mot de passe doit contenir au moins 8 caractères'),
+  name: z.string('Name is required').min(2, 'Name must be at least 2 characters'),
+  email: z.email('Invalid email'),
+  password: z.string('Password is required').min(8, 'Password must be at least 8 characters'),
 });
 
 // Types TypeScript dérivés des schémas

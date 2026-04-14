@@ -48,6 +48,13 @@
     }
   },
   "auth": {
+    "validation": {
+      "emailInvalid": "Invalid email",
+      "passwordRequired": "Password is required",
+      "passwordMin": "Password must be at least 8 characters",
+      "nameRequired": "Name is required",
+      "nameMin": "Name must be at least 2 characters"
+    },
     "login": {
       "title": "Welcome",
       "subtitle": "Sign in to your account to continue",
