@@ -11,7 +11,11 @@ export default defineNuxtConfig({
       nodeCompat: true,
     },
   },
-
+  vite: {
+    optimizeDeps: {
+      include: ['zod', '@vue/devtools-core', '@vue/devtools-kit'],
+    },
+  },
   modules: ['nitro-cloudflare-dev', '@nuxt/ui', 'nuxt-auth-utils', '@nuxthub/core'],
 
   css: ['~/assets/css/main.css'],

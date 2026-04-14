@@ -17,9 +17,9 @@ const links = [
     icon: 'i-lucide-info',
   },
   {
-    label: 'Protected',
-    to: '/protected',
-    icon: 'i-lucide-shield',
+    label: 'Dashboard',
+    to: '/dashboard',
+    icon: 'i-lucide-layout-dashboard',
     requireAuth: true,
   },
 ];
@@ -89,11 +89,11 @@ watch(
               <template #default="{ loggedIn }">
                 <div v-if="loggedIn" class="hidden md:flex items-center gap-2">
                   <UButton
+                    to="/profile"
                     icon="i-lucide-user"
                     color="neutral"
                     variant="ghost"
                     size="sm"
-                    disabled
                     class="max-w-37.5 truncate"
                   >
                     {{ user?.name || user?.email || user?.login }}
@@ -167,11 +167,11 @@ watch(
                     class="flex flex-col gap-2 pt-2 border-t border-gray-200 dark:border-gray-800 mt-2"
                   >
                     <UButton
+                      to="/profile"
                       icon="i-lucide-user"
                       color="neutral"
                       variant="ghost"
                       size="sm"
-                      disabled
                       block
                       class="truncate"
                     >
