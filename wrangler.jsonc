@@ -17,7 +17,7 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_id": "37811bc3-3c6d-4181-9c43-4dbd0c173b88",
+      "database_id": "37811bc3-3c6d-4181-9c43-4dbd0c173b88", // CREATE A D1 DATABASE AND REPLACE THIS ID FOR YOUR OWN (npx wrangler d1 create <db-name>)
     },
   ],
 }
