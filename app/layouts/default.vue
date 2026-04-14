@@ -3,22 +3,23 @@ const route = useRoute();
 const { loggedIn, user } = useUserSession();
 const { logout } = useLogout();
 const { t } = useI18n();
+const localePath = useLocalePath();
 const isMobileMenuOpen = ref(false);
 
 const links = computed(() => [
   {
     label: t('nav.home'),
-    to: '/',
+    to: localePath('/'),
     icon: 'i-lucide-home',
   },
   {
     label: t('nav.about'),
-    to: '/about',
+    to: localePath('/about'),
     icon: 'i-lucide-info',
   },
   {
     label: t('nav.dashboard'),
-    to: '/dashboard',
+    to: localePath('/dashboard'),
     icon: 'i-lucide-layout-dashboard',
     requireAuth: true,
   },
@@ -44,10 +45,10 @@ watch(
       <UContainer class="py-4">
         <div class="flex items-center justify-between gap-4">
           <!-- Logo -->
-          <NuxtLink to="/" class="flex items-center gap-2 font-bold text-xl shrink-0">
+          <NuxtLinkLocale to="/" class="flex items-center gap-2 font-bold text-xl shrink-0">
             <UIcon name="i-lucide-zap" class="w-6 h-6" />
             <span class="hidden sm:inline">NuxtWorker</span>
-          </NuxtLink>
+          </NuxtLinkLocale>
 
           <!-- Desktop Navigation -->
           <nav class="hidden md:flex items-center gap-1 flex-1 justify-center">
@@ -68,12 +69,12 @@ watch(
           <div class="flex items-center gap-2">
             <!-- Language Switcher -->
             <I18nSwitch />
-            
+
             <AuthState>
               <template #default="{ loggedIn }">
                 <div v-if="loggedIn" class="hidden md:flex items-center gap-2">
                   <UButton
-                    to="/profile"
+                    :to="localePath('/profile')"
                     icon="i-lucide-user"
                     color="neutral"
                     variant="ghost"
@@ -88,10 +89,10 @@ watch(
                 </div>
                 <UButton
                   v-else
-                  to="/login"
+                  :to="localePath('/login')"
                   icon="i-lucide-log-in"
-                  :color="route.path === '/login' ? 'primary' : 'neutral'"
-                  :variant="route.path === '/login' ? 'soft' : 'ghost'"
+                  :color="route.path === localePath('/login') ? 'primary' : 'neutral'"
+                  :variant="route.path === localePath('/login') ? 'soft' : 'ghost'"
                   size="sm"
                   class="hidden md:flex"
                 >
@@ -151,7 +152,7 @@ watch(
                     class="flex flex-col gap-2 pt-2 border-t border-gray-200 dark:border-gray-800 mt-2"
                   >
                     <UButton
-                      to="/profile"
+                      :to="localePath('/profile')"
                       icon="i-lucide-user"
                       color="neutral"
                       variant="ghost"
@@ -167,10 +168,10 @@ watch(
                   </div>
                   <UButton
                     v-else
-                    to="/login"
+                    :to="localePath('/login')"
                     icon="i-lucide-log-in"
-                    :color="route.path === '/login' ? 'primary' : 'neutral'"
-                    :variant="route.path === '/login' ? 'soft' : 'ghost'"
+                    :color="route.path === localePath('/login') ? 'primary' : 'neutral'"
+                    :variant="route.path === localePath('/login') ? 'soft' : 'ghost'"
                     size="sm"
                     block
                     class="mt-2 border-t border-gray-200 dark:border-gray-800 pt-2"

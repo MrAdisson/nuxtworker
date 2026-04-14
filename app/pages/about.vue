@@ -4,6 +4,7 @@ definePageMeta({
 });
 
 const { t } = useI18n();
+const localePath = useLocalePath();
 
 const technologies = computed(() => [
   {
@@ -181,7 +182,7 @@ const technologies = computed(() => [
       <div class="bg-primary/5 rounded-lg p-8 text-center">
         <h2 class="text-2xl font-bold mb-4">{{ t('about.cta.title') }}</h2>
         <p class="text-gray-600 dark:text-gray-400 mb-6">{{ t('about.cta.description') }}</p>
-        <UButton to="/login" color="primary" size="lg" icon="i-lucide-arrow-right" trailing>
+        <UButton :to="localePath('/login')" color="primary" size="lg" icon="i-lucide-arrow-right" trailing>
           {{ t('about.cta.goToLogin') }}
         </UButton>
       </div>

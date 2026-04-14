@@ -6,6 +6,7 @@ const toast = useToast();
 const router = useRouter();
 const { fetch: fetchUserSession } = useUserSession();
 const { t } = useI18n();
+const localePath = useLocalePath();
 
 const loading = ref(false);
 
@@ -60,7 +61,7 @@ async function onSubmit(payload: FormSubmitEvent<RegisterInput>) {
       color: 'success',
     });
 
-    await navigateTo('/');
+    await navigateTo(localePath('/'));
   } catch (err: any) {
     toast.add({
       title: t('auth.register.error'),

@@ -1,34 +1,28 @@
 <script setup lang="ts">
-const { locale, locales, setLocale } = useI18n();
+import type { DropdownMenuItem } from '@nuxt/ui';
 
-const availableLocales = computed(() => {
-  return (locales.value as any[]).filter((l) => l.code !== locale.value);
-});
+const { locale, setLocale } = useI18n();
 
-const currentLocale = computed(() => {
-  return (locales.value as any[]).find((l) => l.code === locale.value);
-});
-
-const items = computed(() => [
-  (locales.value as any[]).map((loc) => ({
-    label: loc.name,
-    icon: 'i-lucide-globe',
-    disabled: loc.code === locale.value,
-    click: () => setLocale(loc.code),
-  })),
+const items = computed<DropdownMenuItem[]>(() => [
+  {
+    label: 'English',
+    icon: locale.value === 'en' ? 'i-lucide-check' : undefined,
+    onSelect: () => setLocale('en'),
+  },
+  {
+    label: 'Français',
+    icon: locale.value === 'fr' ? 'i-lucide-check' : undefined,
+    onSelect: () => setLocale('fr'),
+  },
 ]);
+
+const currentLang = computed(() => (locale.value === 'en' ? '🇬🇧 EN' : '🇫🇷 FR'));
 </script>
 
 <template>
-  <UDropdown :items="items">
-    <UButton
-      icon="i-lucide-languages"
-      color="neutral"
-      variant="ghost"
-      size="sm"
-      trailing-icon="i-lucide-chevron-down"
-    >
-      {{ currentLocale?.name }}
+  <UDropdownMenu :items="items" :ui="{ content: 'w-40' }">
+    <UButton icon="i-lucide-languages" color="neutral" variant="ghost" size="sm" trailing-icon="i-lucide-chevron-down">
+      {{ currentLang }}
     </UButton>
-  </UDropdown>
+  </UDropdownMenu>
 </template>

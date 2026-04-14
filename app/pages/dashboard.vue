@@ -6,6 +6,7 @@ definePageMeta({
 
 const { user } = useUserSession();
 const { t } = useI18n();
+const localePath = useLocalePath();
 
 // Données d'exemple pour le dashboard
 const stats = computed(() => [
@@ -83,7 +84,8 @@ function formatTimeAgo(timestamp: string) {
       <!-- Welcome Header -->
       <div class="mb-8">
         <h1 class="text-3xl sm:text-4xl font-bold mb-2">
-          {{ t('dashboard.welcome', { name: user?.name || user?.login || t('common.user') }) }} {{ t('dashboard.welcomeEmoji') }}
+          {{ t('dashboard.welcome', { name: user?.name || user?.login || t('common.user') }) }}
+          {{ t('dashboard.welcomeEmoji') }}
         </h1>
         <p class="text-lg text-gray-600 dark:text-gray-400">{{ t('dashboard.subtitle') }}</p>
       </div>
@@ -152,7 +154,7 @@ function formatTimeAgo(timestamp: string) {
           </template>
 
           <div class="space-y-2">
-            <UButton to="/profile" color="neutral" variant="soft" block icon="i-lucide-user">
+            <UButton :to="localePath('/profile')" color="neutral" variant="soft" block icon="i-lucide-user">
               {{ t('dashboard.quickActions.viewProfile') }}
             </UButton>
             <UButton color="neutral" variant="soft" block icon="i-lucide-settings">

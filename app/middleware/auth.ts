@@ -1,8 +1,9 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  const { loggedIn } = useUserSession()
+  const { loggedIn } = useUserSession();
+  const localePath = useLocalePath();
 
-  // Si l'utilisateur n'est pas connecté, rediriger vers login
+  // Si l'utilisateur n'est pas connectÃ©, rediriger vers login
   if (!loggedIn.value) {
-    return navigateTo('/login')
+    return navigateTo(localePath('/login'));
   }
-})
+});

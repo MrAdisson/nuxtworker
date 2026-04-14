@@ -4,6 +4,7 @@ definePageMeta({
 });
 
 const { t } = useI18n();
+const localePath = useLocalePath();
 
 const features = computed(() => [
   {
@@ -42,10 +43,10 @@ const features = computed(() => [
           {{ t('home.subtitle') }}
         </p>
         <div class="flex gap-4 justify-center">
-          <UButton to="/login" color="primary" size="xl" icon="i-lucide-log-in">
+          <UButton :to="localePath('/login')" color="primary" size="xl" icon="i-lucide-log-in">
             {{ t('home.getStarted') }}
           </UButton>
-          <UButton to="/about" size="xl" variant="outline" icon="i-lucide-info">
+          <UButton :to="localePath('/about')" size="xl" variant="outline" icon="i-lucide-info">
             {{ t('home.learnMore') }}
           </UButton>
         </div>
