@@ -33,6 +33,11 @@ export default defineNuxtConfig({
     },
     langDir: 'locales',
   },
+  hub: {
+    db: {
+      dialect: 'sqlite',
+    },
+  },
 
   css: ['~/assets/css/main.css'],
   app: {
