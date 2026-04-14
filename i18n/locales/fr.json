@@ -1,0 +1,218 @@
+{
+  "common": {
+    "user": "Utilisateur",
+    "na": "N/D",
+    "days": "jours"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "dashboard": "Tableau de bord",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "profile": "Profil",
+    "refresh": "Actualiser"
+  },
+  "home": {
+    "welcome": "Bienvenue sur",
+    "appName": "NuxtWorker",
+    "subtitle": "Une application web moderne propulsée par Nuxt 4 et Cloudflare Workers. Rapide, sécurisée et évolutive par conception.",
+    "getStarted": "Commencer",
+    "learnMore": "En savoir plus",
+    "features": {
+      "title": "Fonctionnalités",
+      "fast": {
+        "title": "Rapide et moderne",
+        "description": "Construit avec Nuxt 4 et déployé sur Cloudflare Workers pour des performances ultra-rapides."
+      },
+      "secure": {
+        "title": "Sécurisé",
+        "description": "Sécurité de niveau entreprise avec authentification et autorisation intégrées."
+      },
+      "serverless": {
+        "title": "Sans serveur",
+        "description": "Propulsé par Cloudflare Workers pour un calcul évolutif et edge-first."
+      },
+      "ui": {
+        "title": "Interface élégante",
+        "description": "Design magnifique avec les composants Nuxt UI et Tailwind CSS."
+      }
+    },
+    "openSource": {
+      "title": "Construit de manière ouverte",
+      "description": "NuxtWorker est open source et disponible sur GitHub. Explorez le code, contribuez ou utilisez-le comme point de départ pour votre prochain projet."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Bienvenue",
+      "subtitle": "Connectez-vous à votre compte pour continuer",
+      "email": "Email",
+      "emailPlaceholder": "votre@email.com",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "Votre mot de passe",
+      "remember": "Se souvenir de moi",
+      "submit": "Se connecter",
+      "withGithub": "Se connecter avec GitHub",
+      "noAccount": "Pas encore de compte ?",
+      "createAccount": "Créer un compte",
+      "success": "Succès",
+      "successMessage": "Vous êtes maintenant connecté",
+      "error": "Erreur",
+      "errorMessage": "Identifiants incorrects"
+    },
+    "register": {
+      "title": "Créer un compte",
+      "subtitle": "Rejoignez-nous en quelques secondes",
+      "name": "Nom",
+      "namePlaceholder": "Votre nom",
+      "email": "Email",
+      "emailPlaceholder": "votre@email.com",
+      "password": "Mot de passe",
+      "passwordPlaceholder": "Choisissez un mot de passe sécurisé",
+      "confirmPassword": "Confirmer le mot de passe",
+      "confirmPasswordPlaceholder": "Confirmez votre mot de passe",
+      "submit": "Créer un compte",
+      "withGithub": "S'inscrire avec GitHub",
+      "hasAccount": "Vous avez déjà un compte ?",
+      "signIn": "Se connecter",
+      "success": "Succès",
+      "successMessage": "Compte créé avec succès",
+      "error": "Erreur",
+      "errorMessage": "Échec de l'inscription"
+    },
+    "logout": {
+      "success": "Succès",
+      "successMessage": "Vous avez été déconnecté",
+      "error": "Erreur",
+      "errorMessage": "Échec de la déconnexion"
+    }
+  },
+  "dashboard": {
+    "welcome": "Bienvenue, {name} !",
+    "welcomeEmoji": "👋",
+    "subtitle": "Voici ce qui se passe sur votre compte aujourd'hui.",
+    "stats": {
+      "totalVisits": "Visites totales",
+      "activeSessions": "Sessions actives",
+      "apiCalls": "Appels API",
+      "successRate": "Taux de réussite"
+    },
+    "recentActivity": {
+      "title": "Activité récente",
+      "actions": {
+        "loggedIn": "Connecté",
+        "updatedProfile": "Profil mis à jour",
+        "apiKeyGenerated": "Clé API générée",
+        "settingsChanged": "Paramètres modifiés"
+      }
+    },
+    "quickActions": {
+      "title": "Actions rapides",
+      "viewProfile": "Voir le profil",
+      "settings": "Paramètres",
+      "notifications": "Notifications",
+      "helpCenter": "Centre d'aide",
+      "needHelp": "Besoin d'aide ?",
+      "contactSupport": "Contacter le support"
+    },
+    "infoBanner": {
+      "title": "Aperçu du tableau de bord",
+      "description": "Ceci est un tableau de bord de démonstration. Dans une application réelle, cela afficherait vos métriques de compte réelles, vos activités récentes et du contenu personnalisé."
+    }
+  },
+  "profile": {
+    "title": "Profil",
+    "accountDetails": "Détails du compte",
+    "security": "Sécurité et confidentialité",
+    "userId": "Identifiant utilisateur",
+    "displayName": "Nom d'affichage",
+    "emailAddress": "Adresse email",
+    "username": "Nom d'utilisateur",
+    "lastLogin": "Dernière connexion",
+    "authProvider": "Fournisseur d'authentification",
+    "authMethod": "Méthode d'authentification",
+    "securedVia": "Sécurisé via {provider}",
+    "sessionStatus": "Statut de la session",
+    "sessionSecure": "Votre session est sécurisée",
+    "active": "Actif",
+    "protected": "Protégé",
+    "stats": {
+      "accountAge": "Ancienneté du compte",
+      "provider": "Fournisseur",
+      "status": "Statut"
+    },
+    "error": {
+      "title": "Erreur de chargement du profil",
+      "loading": "Impossible de charger les données du profil"
+    }
+  },
+  "about": {
+    "title": "À propos de NuxtWorker",
+    "subtitle": "Une application web moderne démontrant la puissance de Nuxt 4 et Cloudflare Workers",
+    "whatIs": {
+      "title": "Qu'est-ce que NuxtWorker ?",
+      "template": {
+        "title": "Template full-stack moderne",
+        "description": "NuxtWorker est un template d'application web prêt pour la production qui combine le meilleur du frontend et de l'edge computing. Construit avec Nuxt 4, il exploite Cloudflare Workers pour diffuser du contenu à une vitesse fulgurante depuis l'edge, au plus près de vos utilisateurs."
+      },
+      "edgePerformance": {
+        "title": "Performance edge-first",
+        "description": "Déployé sur le réseau mondial de Cloudflare, votre application s'exécute à l'edge pour une latence minimale et une vitesse maximale."
+      },
+      "authBuiltIn": {
+        "title": "Authentification intégrée",
+        "description": "Inclut une authentification double (identifiants + GitHub OAuth) avec gestion de session sécurisée dès le départ."
+      },
+      "d1Database": {
+        "title": "Intégration base de données D1",
+        "description": "Intégration transparente avec Cloudflare D1 (SQLite) et Drizzle ORM pour des opérations de base de données type-safe."
+      },
+      "devExperience": {
+        "title": "Expérience développeur",
+        "description": "Support TypeScript complet, rechargement à chaud, migrations automatiques et outillage moderne pour une excellente DX."
+      }
+    },
+    "builtWith": "Construit avec",
+    "technologies": {
+      "nuxt": {
+        "name": "Nuxt 4",
+        "description": "Le framework Vue intuitif"
+      },
+      "cloudflare": {
+        "name": "Cloudflare Workers",
+        "description": "Environnement d'exécution sans serveur"
+      },
+      "ui": {
+        "name": "Nuxt UI",
+        "description": "Composants élégants et accessibles"
+      },
+      "typescript": {
+        "name": "TypeScript",
+        "description": "Développement type-safe"
+      },
+      "learnMore": "En savoir plus"
+    },
+    "startProject": {
+      "title": "Démarrez votre propre projet",
+      "description": "Clonez ce template et lancez votre prochaine application Nuxt avec authentification, D1 et déploiement edge prêts à l'emploi",
+      "downloadZip": "Télécharger ZIP",
+      "fork": "Fork"
+    },
+    "cta": {
+      "title": "Prêt à commencer ?",
+      "description": "Créez un compte pour commencer à construire des choses incroyables",
+      "goToLogin": "Aller à la connexion"
+    }
+  },
+  "components": {
+    "githubButton": {
+      "viewOnGithub": "Voir sur GitHub",
+      "star": "Étoile"
+    },
+    "openSourceBadge": {
+      "openSource": "Open Source",
+      "mit": "Licence MIT"
+    }
+  }
+}

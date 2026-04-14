@@ -7,25 +7,27 @@ definePageMeta({
 const { user } = useUserSession();
 const { data, error, refresh } = await useFetch('/api/profile');
 const { logout } = useLogout();
+const { t } = useI18n();
 
 // Statistiques d'exemple
 const stats = computed(() => [
   {
-    label: 'Account Age',
+    label: t('profile.stats.accountAge'),
     value: data.value?.sessionInfo?.loggedInAt
       ? Math.floor((Date.now() - new Date(data.value.sessionInfo.loggedInAt).getTime()) / (1000 * 60 * 60 * 24)) +
-        ' days'
-      : 'N/A',
+        ' ' +
+        t('common.days')
+      : t('common.na'),
     icon: 'i-lucide-calendar',
   },
   {
-    label: 'Provider',
-    value: data.value?.sessionInfo?.provider?.toUpperCase() || 'N/A',
+    label: t('profile.stats.provider'),
+    value: data.value?.sessionInfo?.provider?.toUpperCase() || t('common.na'),
     icon: 'i-lucide-key',
   },
   {
-    label: 'Status',
-    value: 'Active',
+    label: t('profile.stats.status'),
+    value: t('profile.active'),
     icon: 'i-lucide-check-circle',
   },
 ]);
@@ -42,7 +44,7 @@ const stats = computed(() => [
             <img
               v-if="user?.avatar"
               :src="user.avatar"
-              :alt="user?.name || user?.login || 'User'"
+              :alt="user?.name || user?.login || t('common.user')"
               class="w-24 h-24 sm:w-32 sm:h-32 rounded-full ring-4 ring-primary/20"
             />
             <div
@@ -59,7 +61,7 @@ const stats = computed(() => [
           <!-- User Info -->
           <div class="flex-1 text-center sm:text-left">
             <h1 class="text-3xl sm:text-4xl font-bold mb-2">
-              {{ user?.name || user?.login || 'User' }}
+              {{ user?.name || user?.login || t('common.user') }}
             </h1>
             <p v-if="user?.email" class="text-lg text-gray-600 dark:text-gray-400 mb-4">
               {{ user.email }}
@@ -86,9 +88,11 @@ const stats = computed(() => [
           <!-- Actions -->
           <div class="flex gap-2">
             <UButton icon="i-lucide-refresh-cw" color="neutral" variant="ghost" @click="() => refresh()">
-              Refresh
+              {{ t('nav.refresh') }}
             </UButton>
-            <UButton icon="i-lucide-log-out" color="error" variant="soft" @click="logout"> Logout </UButton>
+            <UButton icon="i-lucide-log-out" color="error" variant="soft" @click="logout">
+              {{ t('nav.logout') }}
+            </UButton>
           </div>
         </div>
       </div>
@@ -112,42 +116,42 @@ const stats = computed(() => [
       <UCard class="mb-8">
         <template #header>
           <div class="flex items-center gap-2">
-            <UIcon name="i-lucide-user-circle" class="w-5 h-5" />
-            <h2 class="text-xl font-semibold">Account Details</h2>
+            <UIcon name="i-lucide-user" class="w-5 h-5" />
+            <h2 class="text-xl font-semibold">{{ t('profile.accountDetails') }}</h2>
           </div>
         </template>
 
         <div class="space-y-6">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div>
-              <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">User ID</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ t('profile.userId') }}</p>
               <p class="font-mono text-sm bg-gray-100 dark:bg-gray-800 px-3 py-2 rounded">
-                {{ data?.user?.id || 'N/A' }}
+                {{ data?.user?.id || t('common.na') }}
               </p>
             </div>
 
             <div v-if="user?.name">
-              <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">Display Name</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ t('profile.displayName') }}</p>
               <p class="px-3 py-2">{{ user.name }}</p>
             </div>
 
             <div v-if="user?.email">
-              <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">Email Address</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ t('profile.emailAddress') }}</p>
               <p class="px-3 py-2">{{ user.email }}</p>
             </div>
 
             <div v-if="user?.login">
-              <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">Username</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ t('profile.username') }}</p>
               <p class="px-3 py-2">{{ user.login }}</p>
             </div>
 
             <div v-if="data?.sessionInfo?.loggedInAt">
-              <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">Last Login</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ t('profile.lastLogin') }}</p>
               <p class="px-3 py-2">{{ new Date(data.sessionInfo.loggedInAt).toLocaleString() }}</p>
             </div>
 
             <div v-if="data?.sessionInfo?.provider">
-              <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">Authentication Provider</p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ t('profile.authProvider') }}</p>
               <p class="px-3 py-2 capitalize">{{ data.sessionInfo.provider }}</p>
             </div>
           </div>
@@ -159,7 +163,7 @@ const stats = computed(() => [
         <template #header>
           <div class="flex items-center gap-2">
             <UIcon name="i-lucide-shield-check" class="w-5 h-5" />
-            <h2 class="text-xl font-semibold">Security & Privacy</h2>
+            <h2 class="text-xl font-semibold">{{ t('profile.security') }}</h2>
           </div>
         </template>
 
@@ -168,24 +172,24 @@ const stats = computed(() => [
             <div class="flex items-center gap-3">
               <UIcon name="i-lucide-key" class="w-5 h-5 text-primary" />
               <div>
-                <p class="font-medium">Authentication Method</p>
+                <p class="font-medium">{{ t('profile.authMethod') }}</p>
                 <p class="text-sm text-gray-500 dark:text-gray-400">
-                  Secured via {{ data?.sessionInfo?.provider || 'OAuth' }}
+                  {{ t('profile.securedVia', { provider: data?.sessionInfo?.provider }) }}
                 </p>
               </div>
             </div>
-            <UBadge color="success">Active</UBadge>
+            <UBadge color="success">{{ t('profile.active') }}</UBadge>
           </div>
 
           <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-900 rounded-lg">
             <div class="flex items-center gap-3">
               <UIcon name="i-lucide-shield" class="w-5 h-5 text-primary" />
               <div>
-                <p class="font-medium">Session Status</p>
-                <p class="text-sm text-gray-500 dark:text-gray-400">Your session is secure</p>
+                <p class="font-medium">{{ t('profile.sessionStatus') }}</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{{ t('profile.sessionSecure') }}</p>
               </div>
             </div>
-            <UBadge color="success">Protected</UBadge>
+            <UBadge color="success">{{ t('profile.protected') }}</UBadge>
           </div>
         </div>
       </UCard>
@@ -195,7 +199,7 @@ const stats = computed(() => [
         <template #header>
           <div class="flex items-center gap-2">
             <UIcon name="i-lucide-alert-circle" class="w-5 h-5" />
-            <h2 class="text-xl font-semibold">Error Loading Profile</h2>
+            <h2 class="text-xl font-semibold">{{ t('profile.error.title') }}</h2>
           </div>
         </template>
         <p>{{ error.message }}</p>

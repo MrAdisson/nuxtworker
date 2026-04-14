@@ -2,29 +2,30 @@
 const route = useRoute();
 const { loggedIn, user } = useUserSession();
 const { logout } = useLogout();
+const { t } = useI18n();
 const isMobileMenuOpen = ref(false);
 
-const links = [
+const links = computed(() => [
   {
-    label: 'Home',
+    label: t('nav.home'),
     to: '/',
     icon: 'i-lucide-home',
   },
   {
-    label: 'About',
+    label: t('nav.about'),
     to: '/about',
     icon: 'i-lucide-info',
   },
   {
-    label: 'Dashboard',
+    label: t('nav.dashboard'),
     to: '/dashboard',
     icon: 'i-lucide-layout-dashboard',
     requireAuth: true,
   },
-];
+]);
 
 const visibleLinks = computed(() => {
-  return links.filter((link) => !link.requireAuth || loggedIn.value);
+  return links.value.filter((link) => !link.requireAuth || loggedIn.value);
 });
 
 // Close mobile menu on route change
@@ -65,6 +66,9 @@ watch(
 
           <!-- Desktop Auth State + Mobile Menu Button -->
           <div class="flex items-center gap-2">
+            <!-- Language Switcher -->
+            <I18nSwitch />
+            
             <AuthState>
               <template #default="{ loggedIn }">
                 <div v-if="loggedIn" class="hidden md:flex items-center gap-2">
@@ -79,7 +83,7 @@ watch(
                     {{ user?.name || user?.email || user?.login }}
                   </UButton>
                   <UButton icon="i-lucide-log-out" color="neutral" variant="ghost" size="sm" @click="logout">
-                    Logout
+                    {{ t('nav.logout') }}
                   </UButton>
                 </div>
                 <UButton
@@ -91,7 +95,7 @@ watch(
                   size="sm"
                   class="hidden md:flex"
                 >
-                  Login
+                  {{ t('nav.login') }}
                 </UButton>
               </template>
               <template #placeholder>
@@ -158,7 +162,7 @@ watch(
                       {{ user?.name || user?.email || user?.login }}
                     </UButton>
                     <UButton icon="i-lucide-log-out" color="neutral" variant="ghost" size="sm" @click="logout" block>
-                      Logout
+                      {{ t('nav.logout') }}
                     </UButton>
                   </div>
                   <UButton
@@ -171,7 +175,7 @@ watch(
                     block
                     class="mt-2 border-t border-gray-200 dark:border-gray-800 pt-2"
                   >
-                    Login
+                    {{ t('nav.login') }}
                   </UButton>
                 </template>
                 <template #placeholder>

@@ -5,61 +5,62 @@ definePageMeta({
 });
 
 const { user } = useUserSession();
+const { t } = useI18n();
 
 // Données d'exemple pour le dashboard
-const stats = [
+const stats = computed(() => [
   {
-    label: 'Total Visits',
+    label: t('dashboard.stats.totalVisits'),
     value: '1,234',
     icon: 'i-lucide-eye',
     trend: '+12.5%',
     trendUp: true,
   },
   {
-    label: 'Active Sessions',
+    label: t('dashboard.stats.activeSessions'),
     value: '24',
     icon: 'i-lucide-users',
     trend: '+3.2%',
     trendUp: true,
   },
   {
-    label: 'API Calls',
+    label: t('dashboard.stats.apiCalls'),
     value: '8,456',
     icon: 'i-lucide-zap',
     trend: '-2.4%',
     trendUp: false,
   },
   {
-    label: 'Success Rate',
+    label: t('dashboard.stats.successRate'),
     value: '98.5%',
     icon: 'i-lucide-check-circle',
     trend: '+0.8%',
     trendUp: true,
   },
-];
+]);
 
-const recentActivity = [
+const recentActivity = computed(() => [
   {
-    action: 'Logged in',
+    action: t('dashboard.recentActivity.actions.loggedIn'),
     timestamp: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
     icon: 'i-lucide-log-in',
   },
   {
-    action: 'Updated profile',
+    action: t('dashboard.recentActivity.actions.updatedProfile'),
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(),
     icon: 'i-lucide-user',
   },
   {
-    action: 'API key generated',
+    action: t('dashboard.recentActivity.actions.apiKeyGenerated'),
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
     icon: 'i-lucide-key',
   },
   {
-    action: 'Settings changed',
+    action: t('dashboard.recentActivity.actions.settingsChanged'),
     timestamp: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3).toISOString(),
     icon: 'i-lucide-settings',
   },
-];
+]);
 
 function formatTimeAgo(timestamp: string) {
   const date = new Date(timestamp);
@@ -81,8 +82,10 @@ function formatTimeAgo(timestamp: string) {
     <div class="max-w-6xl mx-auto">
       <!-- Welcome Header -->
       <div class="mb-8">
-        <h1 class="text-3xl sm:text-4xl font-bold mb-2">Welcome back, {{ user?.name || user?.login || 'User' }}! 👋</h1>
-        <p class="text-lg text-gray-600 dark:text-gray-400">Here's what's happening with your account today.</p>
+        <h1 class="text-3xl sm:text-4xl font-bold mb-2">
+          {{ t('dashboard.welcome', { name: user?.name || user?.login || t('common.user') }) }} {{ t('dashboard.welcomeEmoji') }}
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-400">{{ t('dashboard.subtitle') }}</p>
       </div>
 
       <!-- Stats Grid -->
@@ -112,9 +115,11 @@ function formatTimeAgo(timestamp: string) {
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-2">
                 <UIcon name="i-lucide-activity" class="w-5 h-5" />
-                <h2 class="text-xl font-semibold">Recent Activity</h2>
+                <h2 class="text-xl font-semibold">{{ t('dashboard.recentActivity.title') }}</h2>
               </div>
-              <UButton color="neutral" variant="ghost" size="sm" icon="i-lucide-refresh-cw"> Refresh </UButton>
+              <UButton color="neutral" variant="ghost" size="sm" icon="i-lucide-refresh-cw">
+                {{ t('nav.refresh') }}
+              </UButton>
             </div>
           </template>
 
@@ -142,20 +147,29 @@ function formatTimeAgo(timestamp: string) {
           <template #header>
             <div class="flex items-center gap-2">
               <UIcon name="i-lucide-zap" class="w-5 h-5" />
-              <h2 class="text-xl font-semibold">Quick Actions</h2>
+              <h2 class="text-xl font-semibold">{{ t('dashboard.quickActions.title') }}</h2>
             </div>
           </template>
 
           <div class="space-y-2">
-            <UButton to="/profile" color="neutral" variant="soft" block icon="i-lucide-user"> View Profile </UButton>
-            <UButton color="neutral" variant="soft" block icon="i-lucide-settings"> Settings </UButton>
-            <UButton color="neutral" variant="soft" block icon="i-lucide-bell"> Notifications </UButton>
-            <UButton color="neutral" variant="soft" block icon="i-lucide-help-circle"> Help Center </UButton>
+            <UButton to="/profile" color="neutral" variant="soft" block icon="i-lucide-user">
+              {{ t('dashboard.quickActions.viewProfile') }}
+            </UButton>
+            <UButton color="neutral" variant="soft" block icon="i-lucide-settings">
+              {{ t('dashboard.quickActions.settings') }}
+            </UButton>
+            <UButton color="neutral" variant="soft" block icon="i-lucide-bell">
+              {{ t('dashboard.quickActions.notifications') }}
+            </UButton>
+            <UButton color="neutral" variant="soft" block icon="i-lucide-help-circle">
+              {{ t('dashboard.quickActions.helpCenter') }}
+            </UButton>
           </div>
 
           <template #footer>
             <div class="text-sm text-gray-500 dark:text-gray-400 text-center">
-              Need help? <a href="#" class="text-primary hover:underline">Contact Support</a>
+              {{ t('dashboard.quickActions.needHelp') }}
+              <a href="#" class="text-primary hover:underline">{{ t('dashboard.quickActions.contactSupport') }}</a>
             </div>
           </template>
         </UCard>
@@ -166,10 +180,9 @@ function formatTimeAgo(timestamp: string) {
         <div class="flex items-start gap-3">
           <UIcon name="i-lucide-info" class="w-5 h-5 text-primary mt-0.5" />
           <div>
-            <p class="font-semibold mb-1">Dashboard Preview</p>
+            <p class="font-semibold mb-1">{{ t('dashboard.infoBanner.title') }}</p>
             <p class="text-sm text-gray-600 dark:text-gray-400">
-              This is a demo dashboard. In a real application, this would display your actual account metrics, recent
-              activities, and personalized content.
+              {{ t('dashboard.infoBanner.description') }}
             </p>
           </div>
         </div>

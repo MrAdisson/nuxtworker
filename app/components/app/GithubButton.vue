@@ -11,6 +11,7 @@ withDefaults(defineProps<Props>(), {
   showExternalIcon: true,
 });
 
+const { t } = useI18n();
 const githubUrl = 'https://github.com/MrAdisson/nuxtworker';
 </script>
 
@@ -24,6 +25,6 @@ const githubUrl = 'https://github.com/MrAdisson/nuxtworker';
     icon="i-simple-icons-github"
     :trailing-icon="showExternalIcon ? 'i-lucide-external-link' : undefined"
   >
-    <slot>View on GitHub</slot>
+    <slot>{{ t('components.githubButton.viewOnGithub') }}</slot>
   </UButton>
 </template>

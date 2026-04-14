@@ -6,6 +6,7 @@ export const useLogout = () => {
   const router = useRouter();
   const toast = useToast();
   const { clear } = useUserSession();
+  const { t } = useI18n();
 
   const logout = async () => {
     try {
@@ -15,16 +16,16 @@ export const useLogout = () => {
       await clear();
 
       toast.add({
-        title: 'Success',
-        description: 'You have been logged out',
+        title: t('auth.logout.success'),
+        description: t('auth.logout.successMessage'),
         color: 'success',
       });
 
       router.push('/');
     } catch (error) {
       toast.add({
-        title: 'Error',
-        description: 'Failed to logout',
+        title: t('auth.logout.error'),
+        description: t('auth.logout.errorMessage'),
         color: 'error',
       });
     }

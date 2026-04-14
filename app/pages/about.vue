@@ -3,32 +3,34 @@ definePageMeta({
   layout: 'default',
 });
 
-const technologies = [
+const { t } = useI18n();
+
+const technologies = computed(() => [
   {
-    name: 'Nuxt 4',
+    name: t('about.technologies.nuxt.name'),
     icon: 'i-simple-icons-nuxtdotjs',
-    description: 'The Intuitive Vue Framework',
+    description: t('about.technologies.nuxt.description'),
     link: 'https://nuxt.com',
   },
   {
-    name: 'Cloudflare Workers',
+    name: t('about.technologies.cloudflare.name'),
     icon: 'i-simple-icons-cloudflare',
-    description: 'Serverless execution environment',
+    description: t('about.technologies.cloudflare.description'),
     link: 'https://workers.cloudflare.com',
   },
   {
-    name: 'Nuxt UI',
+    name: t('about.technologies.ui.name'),
     icon: 'i-lucide-palette',
-    description: 'Beautiful & Accessible components',
+    description: t('about.technologies.ui.description'),
     link: 'https://ui.nuxt.com',
   },
   {
-    name: 'TypeScript',
+    name: t('about.technologies.typescript.name'),
     icon: 'i-simple-icons-typescript',
-    description: 'Type-safe development',
+    description: t('about.technologies.typescript.description'),
     link: 'https://www.typescriptlang.org',
   },
-];
+]);
 </script>
 
 <template>
@@ -36,9 +38,9 @@ const technologies = [
     <div class="max-w-4xl mx-auto">
       <!-- Header -->
       <div class="text-center mb-12">
-        <h1 class="text-4xl font-bold mb-4">About NuxtWorker</h1>
+        <h1 class="text-4xl font-bold mb-4">{{ t('about.title') }}</h1>
         <p class="text-xl text-gray-600 dark:text-gray-400 mb-6">
-          A modern web application showcasing the power of Nuxt 4 and Cloudflare Workers
+          {{ t('about.subtitle') }}
         </p>
         <div class="flex gap-3 justify-center">
           <AppGithubButton />
@@ -49,7 +51,7 @@ const technologies = [
       <!-- What is NuxtWorker - Enhanced Section -->
       <div class="mb-12">
         <div class="text-center mb-8">
-          <h2 class="text-3xl font-bold mb-3">What is NuxtWorker?</h2>
+          <h2 class="text-3xl font-bold mb-3">{{ t('about.whatIs.title') }}</h2>
           <div class="w-20 h-1 bg-primary mx-auto rounded-full"></div>
         </div>
 
@@ -60,11 +62,9 @@ const technologies = [
                 <UIcon name="i-lucide-rocket" class="w-6 h-6 text-primary" />
               </div>
               <div class="flex-1">
-                <h3 class="text-xl font-semibold mb-2">Modern Full-Stack Template</h3>
+                <h3 class="text-xl font-semibold mb-2">{{ t('about.whatIs.template.title') }}</h3>
                 <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  NuxtWorker is a production-ready web application template that combines the best of frontend and edge
-                  computing. Built with Nuxt 4, it leverages Cloudflare Workers to deliver content at lightning speed
-                  from the edge, closest to your users.
+                  {{ t('about.whatIs.template.description') }}
                 </p>
               </div>
             </div>
@@ -75,10 +75,9 @@ const technologies = [
               <div class="flex items-start gap-3">
                 <UIcon name="i-lucide-zap" class="w-5 h-5 text-primary shrink-0 mt-1" />
                 <div>
-                  <h4 class="font-semibold mb-2">Edge-First Performance</h4>
+                  <h4 class="font-semibold mb-2">{{ t('about.whatIs.edgePerformance.title') }}</h4>
                   <p class="text-sm text-gray-600 dark:text-gray-400">
-                    Deployed on Cloudflare's global network, your application runs at the edge for minimal latency and
-                    maximum speed.
+                    {{ t('about.whatIs.edgePerformance.description') }}
                   </p>
                 </div>
               </div>
@@ -88,10 +87,9 @@ const technologies = [
               <div class="flex items-start gap-3">
                 <UIcon name="i-lucide-shield-check" class="w-5 h-5 text-primary shrink-0 mt-1" />
                 <div>
-                  <h4 class="font-semibold mb-2">Authentication Built-In</h4>
+                  <h4 class="font-semibold mb-2">{{ t('about.whatIs.authBuiltIn.title') }}</h4>
                   <p class="text-sm text-gray-600 dark:text-gray-400">
-                    Includes dual authentication (credentials + GitHub OAuth) with secure session management out of the
-                    box.
+                    {{ t('about.whatIs.authBuiltIn.description') }}
                   </p>
                 </div>
               </div>
@@ -101,9 +99,9 @@ const technologies = [
               <div class="flex items-start gap-3">
                 <UIcon name="i-lucide-database" class="w-5 h-5 text-primary shrink-0 mt-1" />
                 <div>
-                  <h4 class="font-semibold mb-2">D1 Database Integration</h4>
+                  <h4 class="font-semibold mb-2">{{ t('about.whatIs.d1Database.title') }}</h4>
                   <p class="text-sm text-gray-600 dark:text-gray-400">
-                    Seamlessly integrated with Cloudflare D1 (SQLite) and Drizzle ORM for type-safe database operations.
+                    {{ t('about.whatIs.d1Database.description') }}
                   </p>
                 </div>
               </div>
@@ -113,9 +111,9 @@ const technologies = [
               <div class="flex items-start gap-3">
                 <UIcon name="i-lucide-code-2" class="w-5 h-5 text-primary shrink-0 mt-1" />
                 <div>
-                  <h4 class="font-semibold mb-2">Developer Experience</h4>
+                  <h4 class="font-semibold mb-2">{{ t('about.whatIs.devExperience.title') }}</h4>
                   <p class="text-sm text-gray-600 dark:text-gray-400">
-                    Full TypeScript support, hot reload, automatic migrations, and modern tooling for an excellent DX.
+                    {{ t('about.whatIs.devExperience.description') }}
                   </p>
                 </div>
               </div>
@@ -126,7 +124,7 @@ const technologies = [
 
       <!-- Technologies -->
       <div class="mb-12">
-        <h2 class="text-2xl font-bold mb-6 text-center">Built With</h2>
+        <h2 class="text-2xl font-bold mb-6 text-center">{{ t('about.builtWith') }}</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <UCard v-for="tech in technologies" :key="tech.name">
             <div class="flex items-start gap-4">
@@ -139,7 +137,7 @@ const technologies = [
                   {{ tech.description }}
                 </p>
                 <UButton :to="tech.link" target="_blank" size="xs" variant="link" icon="i-lucide-external-link">
-                  Learn more
+                  {{ t('about.technologies.learnMore') }}
                 </UButton>
               </div>
             </div>
@@ -152,11 +150,10 @@ const technologies = [
         <div class="border border-gray-200 dark:border-gray-800 rounded-lg p-6 text-center">
           <div class="flex items-center justify-center gap-2 mb-3">
             <UIcon name="i-lucide-rocket" class="w-5 h-5 text-primary" />
-            <h3 class="text-lg font-semibold">Start Your Own Project</h3>
+            <h3 class="text-lg font-semibold">{{ t('about.startProject.title') }}</h3>
           </div>
           <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-            Clone this template and kickstart your next Nuxt application with authentication, D1, and edge deployment
-            ready to go
+            {{ t('about.startProject.description') }}
           </p>
           <div class="flex gap-3 justify-center">
             <UButton
@@ -165,7 +162,7 @@ const technologies = [
               variant="outline"
               icon="i-lucide-download"
             >
-              Download ZIP
+              {{ t('about.startProject.downloadZip') }}
             </UButton>
             <UButton
               to="https://github.com/MrAdisson/nuxtworker/fork"
@@ -174,7 +171,7 @@ const technologies = [
               icon="i-lucide-git-fork"
               size="sm"
             >
-              Fork
+              {{ t('about.startProject.fork') }}
             </UButton>
           </div>
         </div>
@@ -182,9 +179,11 @@ const technologies = [
 
       <!-- CTA -->
       <div class="bg-primary/5 rounded-lg p-8 text-center">
-        <h2 class="text-2xl font-bold mb-4">Ready to get started?</h2>
-        <p class="text-gray-600 dark:text-gray-400 mb-6">Create an account to start building amazing things</p>
-        <UButton to="/login" color="primary" size="lg" icon="i-lucide-arrow-right" trailing> Go to Login </UButton>
+        <h2 class="text-2xl font-bold mb-4">{{ t('about.cta.title') }}</h2>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">{{ t('about.cta.description') }}</p>
+        <UButton to="/login" color="primary" size="lg" icon="i-lucide-arrow-right" trailing>
+          {{ t('about.cta.goToLogin') }}
+        </UButton>
       </div>
     </div>
   </UContainer>
