@@ -5,7 +5,7 @@ definePageMeta({
 });
 
 const { user } = useUserSession();
-const { data, error, refresh } = await useFetch('/api/protected');
+const { data, error, refresh } = await useFetch('/api/profile');
 
 // Statistiques d'exemple
 const stats = computed(() => [

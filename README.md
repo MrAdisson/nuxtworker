@@ -132,7 +132,7 @@ npm run dev
 - `/register` - Registration page
 - `/dashboard` - Protected dashboard (requires auth)
 - `/profile` - User profile (requires auth)
-- `/api/protected` - Protected API endpoint example
+- `/api/profile` - User profile API endpoint (requires auth)
 
 ## Project Structure
 
@@ -165,7 +165,7 @@ server/
 │   │   ├── login.post.ts              # Email/password login
 │   │   ├── register.post.ts           # User registration
 │   │   └── logout.post.ts             # Logout endpoint
-│   └── protected.get.ts               # Protected API example
+│   └── profile.get.ts                 # User profile API endpoint
 ├── routes/
 │   └── auth/
 │       └── github.get.ts              # GitHub OAuth handler

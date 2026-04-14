@@ -140,10 +140,10 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 Pour protéger une route API avec session obligatoire :
 
 ```typescript
-// server/api/protected.get.ts
+// server/api/profile.get.ts
 import type { User } from '#auth-utils';
 
-interface ProtectedResponse {
+interface ProfileResponse {
   message: string;
   user: User;
   sessionInfo: {
@@ -152,12 +152,12 @@ interface ProtectedResponse {
   };
 }
 
-export default defineEventHandler<Promise<ProtectedResponse>>(async (event) => {
+export default defineEventHandler<Promise<ProfileResponse>>(async (event) => {
   // requireUserSession() lance une erreur 401 si pas de session
   const session = await requireUserSession(event);
 
   return {
-    message: 'This is protected data',
+    message: 'User profile data',
     user: session.user,
     sessionInfo: {
       loggedInAt: session.loggedInAt,

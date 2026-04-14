@@ -1,6 +1,6 @@
 import type { User } from '#auth-utils';
 
-interface ProtectedResponse {
+interface ProfileResponse {
   message: string;
   user: User;
   sessionInfo: {
@@ -9,12 +9,12 @@ interface ProtectedResponse {
   };
 }
 
-export default defineEventHandler<Promise<ProtectedResponse>>(async (event) => {
+export default defineEventHandler<Promise<ProfileResponse>>(async (event) => {
   // Cette route nécessite une session utilisateur active
   const session = await requireUserSession(event);
 
   return {
-    message: 'This is protected data',
+    message: 'User profile data',
     user: session.user,
     sessionInfo: {
       loggedInAt: session.loggedInAt,
