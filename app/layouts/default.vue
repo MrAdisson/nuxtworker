@@ -1,8 +1,7 @@
 <script setup lang="ts">
 const route = useRoute();
-const { loggedIn, user, clear } = useUserSession();
-const router = useRouter();
-const toast = useToast();
+const { loggedIn, user } = useUserSession();
+const { logout } = useLogout();
 const isMobileMenuOpen = ref(false);
 
 const links = [
@@ -27,25 +26,6 @@ const links = [
 const visibleLinks = computed(() => {
   return links.filter((link) => !link.requireAuth || loggedIn.value);
 });
-
-async function logout() {
-  try {
-    await $fetch('/api/auth/logout', { method: 'POST' });
-    await clear();
-    toast.add({
-      title: 'Success',
-      description: 'You have been logged out',
-      color: 'success',
-    });
-    router.push('/');
-  } catch (error) {
-    toast.add({
-      title: 'Error',
-      description: 'Failed to logout',
-      color: 'error',
-    });
-  }
-}
 
 // Close mobile menu on route change
 watch(

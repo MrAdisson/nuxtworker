@@ -6,6 +6,7 @@ definePageMeta({
 
 const { user } = useUserSession();
 const { data, error, refresh } = await useFetch('/api/profile');
+const { logout } = useLogout();
 
 // Statistiques d'exemple
 const stats = computed(() => [
@@ -28,27 +29,6 @@ const stats = computed(() => [
     icon: 'i-lucide-check-circle',
   },
 ]);
-
-const router = useRouter();
-const toast = useToast();
-
-async function handleLogout() {
-  try {
-    await $fetch('/api/auth/logout', { method: 'POST' });
-    toast.add({
-      title: 'Success',
-      description: 'You have been logged out',
-      color: 'success',
-    });
-    router.push('/');
-  } catch (error) {
-    toast.add({
-      title: 'Error',
-      description: 'Failed to logout',
-      color: 'error',
-    });
-  }
-}
 </script>
 
 <template>
@@ -108,7 +88,7 @@ async function handleLogout() {
             <UButton icon="i-lucide-refresh-cw" color="neutral" variant="ghost" @click="() => refresh()">
               Refresh
             </UButton>
-            <UButton icon="i-lucide-log-out" color="error" variant="soft" @click="handleLogout"> Logout </UButton>
+            <UButton icon="i-lucide-log-out" color="error" variant="soft" @click="logout"> Logout </UButton>
           </div>
         </div>
       </div>
