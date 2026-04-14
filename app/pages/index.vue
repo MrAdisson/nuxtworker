@@ -65,5 +65,20 @@ const features = [
         </div>
       </UContainer>
     </div>
+
+    <!-- Open Source Section -->
+    <UContainer class="py-16">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-3xl font-bold mb-4">Built in the Open</h2>
+        <p class="text-gray-600 dark:text-gray-400 mb-6">
+          NuxtWorker is open source and available on GitHub. Explore the code, contribute, or use it as a starting point
+          for your next project.
+        </p>
+        <div class="flex gap-3 justify-center">
+          <AppGithubButton size="lg" />
+          <AppOpenSourceBadge />
+        </div>
+      </div>
+    </UContainer>
   </div>
 </template>
